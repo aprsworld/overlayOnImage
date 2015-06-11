@@ -163,14 +163,6 @@ var spanTop = spanId + 30000;
 var inputValue = inputId;
 var inputSize = inputId + 100000;
 
-localStorage.setItem('count',count);
-localStorage.setItem(spanhtml,span.innerHTML);
-//localStorage.setItem(spanSize,span.style.font.size);
-//localStorage.setItem(spanLeft, span.style.left);
-//localStorage.setItem(spanTop, span.style.top);
-
-localStorage.setItem(inputValue, input.value);  
-//localStorage.setItem(inputSize, input.style.font);
 }
 
 function del (delbutID){
@@ -184,15 +176,6 @@ var span = document.getElementById(spanId);
 var edit = document.getElementById(editId);
 var font = document.getElementById(fontbutID);
 var delet = document.getElementById(delbutID);
-
-var spanLeft = spanId;
-var spanhtml = spanId + 10000;
-var spanSize = spanId + 20000;
-var spanTop = spanId + 30000;
-
-var inputValue = inputId;
-localStorage.removeItem(spanhtml);
-localStorage.removeItem(inputValue);
 
 input.remove();
 span.remove();
