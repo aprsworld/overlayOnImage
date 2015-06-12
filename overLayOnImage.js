@@ -6,7 +6,7 @@ var spanOffset = 1000000;
 var delbutOffset = 3000000;
 var fontbutOffset = 4000000;
 	
-function Func(){
+var Func = function(){
 	createSpan("change this text by using the textfield");
 	createInput('edit text here');
 	createEditB();
@@ -14,14 +14,15 @@ function Func(){
 	createDelB();	
 	//console.log(count);
         count = count + 1;
-}
+};
+
 /**
  * createSpan
  *
  * @param text
  * @return {undefined}
  */
-function createSpan(text){
+var createSpan = function(text){
 //create span node
 	var span = document.createElement("span");
 	var node = document.createTextNode(text);
@@ -30,12 +31,12 @@ function createSpan(text){
 		span.id = count + spanOffset;		   
 	console.log('created span  node');
 		element.appendChild(span);
-	       $(function(){
-                    $('.texts').draggable();
-                     });
+//	       $(function(){
+  //                  $('.texts').draggable();
+    //                 });
 		createBr(element);		
-}
-function createInput(text){
+};
+var createInput = function(text){
 //create input node
 	 var inp = document.createElement("input");
 		inp.type = "text";
@@ -45,8 +46,8 @@ function createInput(text){
 	console.log('created input node');
 	        ele.appendChild(inp);
 	
-}
-function createEditB(){
+};
+var createEditB = function(){
 // create edit button associated with input node
 	 var but = document.createElement("button");
 		but.className = "modify";
@@ -56,8 +57,8 @@ function createEditB(){
         editSpan(but.id);
 },false);
 		ele.appendChild(but);
-}
-function editSpan(ButID){
+};
+var editSpan = function(ButID){
         var idinp = String(Number(ButID) + inputOffset);
 				console.log('update text');
 			var idspan = String(Number(ButID) + spanOffset);
@@ -68,8 +69,8 @@ function editSpan(ButID){
 				spa.innerHTML = inp1.value;
               save(ButID);
 	
-}
-function createDelB(){
+};
+var createDelB = function(){
 // create remove button associated with input node
 	var rembut = document.createElement("button");
 		rembut.className = "modify";
@@ -81,14 +82,14 @@ console.log('create rembut');
        }, false);
 		ele.appendChild(rembut);	
 		createBr(ele);
-}
-function createBr(div){
+};
+var createBr = function(div){
 //create a br element
 	var bre = document.createElement("br");
 		div.appendChild(bre);
 	
-}
-function changeFontButton() {
+};
+var changeFontButton = function() {
 // create a change font button
 	var fontbut = document.createElement("button");
 		fontbut.className = "modify";
@@ -99,9 +100,9 @@ console.log('create fontbut');
         changeFontSize(fontbut.id);
         }, false);
 		ele.appendChild(fontbut);	
-}
+};
 
-function changeFontSize(FontbutId){
+var changeFontSize = function(FontbutId){
 //change font size for text 
 	var selectFont = document.getElementById("fontSize");
 		if(selectFont !== null){
@@ -148,43 +149,44 @@ console.log(selectFontValue);
             document.getElementById(FontbutId-delbutOffset).style.font = " 12px arial,serif";
         }
     }
-}
-function save (editID){
-var inputId =Number(editID) + inputOffset;
-var spanId =Number(editID) + spanOffset;
-var span = document.getElementById(spanId);
-var input = document.getElementById(inputId);
+};
 
-var spanLeft = spanId;
-var spanhtml = spanId + 10000;
-var spanSize = spanId + 20000;
-var spanTop = spanId + 30000;
+var save = function(editID){
+    var inputId =Number(editID) + inputOffset;
+    var spanId =Number(editID) + spanOffset;
+    var span = document.getElementById(spanId);
+    var input = document.getElementById(inputId);
 
-var inputValue = inputId;
-var inputSize = inputId + 100000;
+    var spanLeft = spanId;
+    var spanhtml = spanId + 10000;
+    var spanSize = spanId + 20000;
+    var spanTop = spanId + 30000;
 
-}
+    var inputValue = inputId;
+    var inputSize = inputId + 100000;
 
-function del (delbutID){
-var inputId = delbutID - spanOffset;
-var spanId = delbutID - inputOffset;
-var editId = delbutID - delbutOffset;
-var fontbutID =Number(delbutID) + spanOffset;
+};
 
-var input = document.getElementById(inputId);
-var span = document.getElementById(spanId);
-var edit = document.getElementById(editId);
-var font = document.getElementById(fontbutID);
-var delet = document.getElementById(delbutID);
+var del = function(delbutID){
+    var inputId = delbutID - spanOffset;
+    var spanId = delbutID - inputOffset;
+    var editId = delbutID - delbutOffset;
+    var fontbutID =Number(delbutID) + spanOffset;
 
-input.remove();
-span.remove();
-edit.remove();
-font.remove();
-delet.remove();
-}
+    var input = document.getElementById(inputId);
+    var span = document.getElementById(spanId);
+    var edit = document.getElementById(editId);
+    var font = document.getElementById(fontbutID);
+    var delet = document.getElementById(delbutID);
 
-function load (){
+    input.remove();
+    span.remove();
+    edit.remove();
+    font.remove();
+    delet.remove();
+};
 
-}
+var load = function(){
+
+};
 
