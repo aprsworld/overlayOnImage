@@ -27,7 +27,6 @@ var array = {
 	
 var Func = function(){
         createEverything(lengt(array));
-        count = count + 1;
 };
 
 /**
@@ -216,6 +215,7 @@ var createEverything = function(lengt){
            console.log(value);
            createSpan(value);
            createBr(document.getElementById('mod'));
+           count = count + 1;
            Count = Count + 1;
       }
    };
