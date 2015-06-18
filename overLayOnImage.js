@@ -5,14 +5,28 @@ var inputOffset = 2000000;
 var spanOffset = 1000000;
 var delbutOffset = 3000000;
 var fontbutOffset = 4000000;
+var Count = 0;
+
+var array = {  
+   "packet_date":"2015-06-04 14:55:57",
+   "sequenceNumber":"25009",
+   "windSpeed_ms":"14.2",
+   "windSpeed_mph":"31.8",
+   "windGust_ms":"16.5",
+   "windGust_mph":"36.9",
+   "windDirection":"146",
+   "temperature_c":"3.9",
+   "tempe    rature_f":"39.0",
+   "now":"2015-06-04 14:56:04",
+   "camFileURL0":"http:\/\/cam.aprsworld.com\/A4405\/2015\/06\/04\/20150604_145524.jpg",
+   "camDisplayName0":"Willow Mountain Camera",
+   "camURLPrimary0":"http:\/\/    cam.aprsworld.com\/A4405\/latest.jpg",
+   "displayName":"Willow Mountain",
+   "stripLine":"http:\/\/data.asrichards.com\/data\/stripLinePlot.php?station_id=A4221&hours=24&start_date=2015-06-04+14%3A56%3A59"
+   };
 	
 var Func = function(){
-	createSpan("change this text by using the textfield");
-	createInput('edit text here');
-	createEditB();
-    changeFontButton();
-	createDelB();	
-	//console.log(count);
+        createEverything(lengt(array));
         count = count + 1;
 };
 
@@ -31,9 +45,9 @@ var createSpan = function(text){
 		span.id = count + spanOffset;		   
 	console.log('created span  node');
 		element.appendChild(span);
-//	       $(function(){
-  //                  $('.texts').draggable();
-    //                 });
+	       $(function(){
+                   $('.texts').draggable();
+                     });
 		createBr(element);		
 };
 var createInput = function(text){
@@ -190,3 +204,18 @@ var load = function(){
 
 };
 
+var lengt = function(array){
+   var numberOfData = Object.keys(array).length;
+   console.log(numberOfData);
+   return numberOfData;
+   };
+var createEverything = function(lengt){
+    for (var i = 0; i < lengt; i++){
+           var key = Object.keys(array)[Count];
+           var value = array[key];
+           console.log(value);
+           createSpan(value);
+           createBr(document.getElementById('mod'));
+           Count = Count + 1;
+      }
+   };
