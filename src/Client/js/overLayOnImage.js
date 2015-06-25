@@ -26,6 +26,7 @@ var array = {
    };
 	
 var Func = function(){
+        createBr(ele);
         createEverything(lengt(array));
 };
 
@@ -94,7 +95,6 @@ console.log('create rembut');
       del(rembut.id); 
        }, false);
 		ele.appendChild(rembut);	
-		createBr(ele);
 };
 var createBr = function(div){
 //create a br element
@@ -214,6 +214,10 @@ var createEverything = function(lengt){
            var value = array[key];
            console.log(value);
            createSpan(value);
+           createInput(value);
+           createEditB();
+           changeFontButton();
+           createDelB();
            createBr(document.getElementById('mod'));
            count = count + 1;
            Count = Count + 1;
