@@ -10,6 +10,7 @@ var Count = 0;
 var array = [];
 	
 var Func = function(){
+createBr(ele);
 $.getJSON("http://data.asrichards.com/data/json4.php?station_id=A4221", function(result){
 $.each(result, function(i, field){
   array.push(field);  
