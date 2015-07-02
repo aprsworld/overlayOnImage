@@ -5,8 +5,9 @@
 <title> program1 </title>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 </head>
-<body onload = 'Func()'> 
+<body > 
 <div id = 'mod'>
 <span>font size: </span>
 <select id = 'fontSize'>
@@ -20,17 +21,21 @@
 <option value = '28'>28</option>
 <option value = '32'>32</option>
 <option value = '36'>36</option>
-</select><br>
+</select> 
+<br>
+<button onclick = 'addMoreText()'>Add More Textfields</button><br> </div>
+<div>
+    <input id = 'jsonURL' type = 'text' placeholder = 'Json file URL'>
+    <button id = 'json' onclick = 'JsonFile()'>submit</button>
+<br>
 <span> refresh interval:</span>
-<select>
+<select onchange = 'refreshInterval(value)'>
     <option value = '10'>10</option>
-    <option value = '30'>30</option>
+    <option value = '30' selected>30</option>
     <option value = '60'>60</option>
 </select>
-<br>
-<button onclick = 'addMoreText()'>Add More Textfields</button> </div>
+</div>
 <div id = "image">
-   <img src="http://cam.aprsworld.com/boswell0/latest.jpg" style="width:608px;height:456px; left: 45px;">
 </div>
 <div id = 'txt'></div>
 </body>

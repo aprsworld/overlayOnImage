@@ -8,32 +8,34 @@ var fontbutOffset = 4000000;
 var Count = 0;
 
 var array = [];
-	
+var ImportedJsonData;
+
+var JsonFile = function(){
+var jsonUrl = document.getElementById('jsonURL');
+ImportedJsonData = jsonUrl.value;
+Func();
+};
 var Func = function(){
-createBr(ele);
-$.getJSON("http://data.asrichards.com/data/json4.php?station_id=A4221", function(result){
-$.each(result, function(i, field){
-  array.push(field);  
-  console.log(i);
+$.getJSON(ImportedJsonData, function(result){
+$.each(result,function(i,field){
+  array.push(field);
   createEverything(field);
   createBr(ele);
-    count = count + 1;
-   // setTimeout(Func(),3000);
+  count = count +1;
 });
 });
 };
+var refreshInterval = function(value){
+    var integer = parseInt(value) *100;
+    setTimeout(Func, integer);
+    refreshInterval(value);
+    };
 var addMoreText = function(){
 createEverything('add new data');
 createDelB();
 createBr(ele);
 count = count + 1;
 };
-/**
- * createSpan
- *
- * @param text
- * @return {undefined}
- */
 var createSpan = function(text){
 //create span node
 	var span = document.createElement("span");
