@@ -9,7 +9,6 @@ var Count = 0;
 var keyArray = [];
 var array = [];
 var ImportedJsonData;
-var i = 0;
 
 var JsonFile = function(){
 
@@ -17,6 +16,7 @@ var jsonUrl = document.getElementById('jsonURL');
 ImportedJsonData = jsonUrl.value;
 Func();
 };
+
 var Func = function(){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
@@ -38,11 +38,13 @@ else{
     refreshInterval(integer);
     }
     };
+
 var updateData = function(){
 for (var i = 0; i< array.length; i++){
 console.log(array[i]);
 }
 };
+
 var displayValue = function(value){
 value = Number(value);
 if (value === -1){
@@ -54,6 +56,7 @@ createEverything(array[value]);
 createBr(ele);
 }
 };
+
 var createOptions = function(key){
     daySelect = document.getElementById('data');
     myOption = document.createElement("option");
@@ -61,6 +64,7 @@ var createOptions = function(key){
     myOption.value = count;
     daySelect.appendChild(myOption);
     };
+
 var addMoreText = function(){
 createEverything('add new data');
 createEditB();
@@ -68,6 +72,7 @@ createDelB();
 createBr(ele);
 count = count + 1;
 };
+
 var createSpan = function(text){
 //create span node
 	var span = document.createElement("span");
@@ -82,6 +87,7 @@ var createSpan = function(text){
                      });
 		createBr(element);		
 };
+
 var createInput = function(text){
 //create input node
 	 var inp = document.createElement("input");
@@ -93,6 +99,7 @@ var createInput = function(text){
 	        ele.appendChild(inp);
 	
 };
+
 var createEditB = function(){
 // create edit button associated with input node
 	 var but = document.createElement("button");
@@ -104,6 +111,7 @@ var createEditB = function(){
 },false);
 		ele.appendChild(but);
 };
+
 var editSpan = function(ButID){
         var idinp = String(Number(ButID) + inputOffset);
 				console.log('update text');
@@ -116,6 +124,7 @@ var editSpan = function(ButID){
               save(ButID);
 	
 };
+
 var createDelB = function(){
 // create remove button associated with input node
 	var rembut = document.createElement("button");
@@ -128,12 +137,14 @@ console.log('create rembut');
        }, false);
 		ele.appendChild(rembut);	
 };
+
 var createBr = function(div){
 //create a br element
 	var bre = document.createElement("br");
 		div.appendChild(bre);
 	
 };
+
 var changeFontButton = function() {
 // create a change font button
 	var fontbut = document.createElement("button");
