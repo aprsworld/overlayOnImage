@@ -12,6 +12,7 @@ var ImportedJsonData;
 var i = 0;
 
 var JsonFile = function(){
+
 var jsonUrl = document.getElementById('jsonURL');
 ImportedJsonData = jsonUrl.value;
 Func();
@@ -20,39 +21,44 @@ var Func = function(){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
   array.push(field);
-  keyArray.push(i);
-  createEverything(field);
   console.log(i);
-  createBr(ele);
-  count = count +1;
   createOptions(i);
+  count = count +1;
 });
 });
 };
+
 var refreshInterval = function(value){
-if (i<3){
 if (value == 'disable'){
 
 }
 else{
     var integer = 1000;
     setTimeout(updateData, integer);
-    i = i + 1;
     refreshInterval(integer);
-    }
-    }
-    else {
-alert('stop');
     }
     };
 var updateData = function(){
-alert('it works!');
+for (var i = 0; i< array.length; i++){
+console.log(array[i]);
+}
+};
+var displayValue = function(value){
+value = Number(value);
+if (value === -1){
+alert('no value');
+}
+else{
+console.log(value);
+createEverything(array[value]);
+createBr(ele);
+}
 };
 var createOptions = function(key){
     daySelect = document.getElementById('data');
     myOption = document.createElement("option");
     myOption.innerHTML = key;
-    myOption.value = key;
+    myOption.value = count;
     daySelect.appendChild(myOption);
     };
 var addMoreText = function(){
