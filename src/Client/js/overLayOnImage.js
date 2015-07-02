@@ -6,9 +6,10 @@ var spanOffset = 1000000;
 var delbutOffset = 3000000;
 var fontbutOffset = 4000000;
 var Count = 0;
-
+var keyArray = [];
 var array = [];
 var ImportedJsonData;
+var i = 0;
 
 var JsonFile = function(){
 var jsonUrl = document.getElementById('jsonURL');
@@ -19,19 +20,44 @@ var Func = function(){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
   array.push(field);
+  keyArray.push(i);
   createEverything(field);
+  console.log(i);
   createBr(ele);
   count = count +1;
+  createOptions(i);
 });
 });
 };
 var refreshInterval = function(value){
-    var integer = parseInt(value) *100;
-    setTimeout(Func, integer);
-    refreshInterval(value);
+if (i<3){
+if (value == 'disable'){
+
+}
+else{
+    var integer = 1000;
+    setTimeout(updateData, integer);
+    i = i + 1;
+    refreshInterval(integer);
+    }
+    }
+    else {
+alert('stop');
+    }
+    };
+var updateData = function(){
+alert('it works!');
+};
+var createOptions = function(key){
+    daySelect = document.getElementById('data');
+    myOption = document.createElement("option");
+    myOption.innerHTML = key;
+    myOption.value = key;
+    daySelect.appendChild(myOption);
     };
 var addMoreText = function(){
 createEverything('add new data');
+createEditB();
 createDelB();
 createBr(ele);
 count = count + 1;
@@ -199,13 +225,8 @@ var del = function(delbutID){
     delet.remove();
 };
 
-var load = function(){
-
-};
-
 var createEverything = function(value){
            createSpan(value);
            createInput(value);
-           createEditB();
            changeFontButton();
    };
