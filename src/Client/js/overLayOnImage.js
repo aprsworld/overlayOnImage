@@ -16,8 +16,17 @@ $.each(result, function(i, field){
   array.push(field);  
   console.log(i);
   createEverything(field);
+  createBr(ele);
+    count = count + 1;
+   // setTimeout(Func(),3000);
 });
 });
+};
+var addMoreText = function(){
+createEverything('add new data');
+createDelB();
+createBr(ele);
+count = count + 1;
 };
 /**
  * createSpan
@@ -192,17 +201,9 @@ var load = function(){
 
 };
 
-var lengt = function(array){
-   var numberOfData = Object.keys(array).length;
-   console.log(numberOfData);
-   return numberOfData;
-   };
 var createEverything = function(value){
            createSpan(value);
            createInput(value);
            createEditB();
            changeFontButton();
-           createDelB();
-           createBr(document.getElementById('mod'));
-           count = count + 1;
    };

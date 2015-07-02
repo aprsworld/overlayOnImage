@@ -7,7 +7,7 @@
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body onload = 'Func()'> 
-<span id = 'mod'>
+<div id = 'mod'>
 <span>font size: </span>
 <select id = 'fontSize'>
 <option value = '10'>10</option>
@@ -20,9 +20,17 @@
 <option value = '28'>28</option>
 <option value = '32'>32</option>
 <option value = '36'>36</option>
-</select> </span>
+</select><br>
+<span> refresh interval:</span>
+<select>
+    <option value = '10'>10</option>
+    <option value = '30'>30</option>
+    <option value = '60'>60</option>
+</select>
+<br>
+<button onclick = 'addMoreText()'>Add More Textfields</button> </div>
 <div id = "image">
-<img src="http://cam.aprsworld.com/boswell0/latest.jpg" style="width:608px;height:456px; left: 45px;">
+   <img src="http://cam.aprsworld.com/boswell0/latest.jpg" style="width:608px;height:456px; left: 45px;">
 </div>
 <div id = 'txt'></div>
 </body>
