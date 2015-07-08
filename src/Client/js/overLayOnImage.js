@@ -1,6 +1,7 @@
-var element = document.getElementById("txt");
-var ele = document.getElementById("mod");
 var count = 0;
+var ele = document.getElementById('mod');
+var image;
+var element;
 var inputOffset = 2000000;
 var spanOffset = 1000000;
 var delbutOffset = 3000000;
@@ -10,6 +11,14 @@ var keyArray = [];
 var array = [];
 var ImportedJsonData;
 
+var Load = function(){
+     image = document.createElement('div');
+        image.id = 'image';
+        document.body.appendChild(image);
+     element = document.createElement('div');
+        element.id = 'txt';
+        document.body.appendChild(element);
+ };
 var JsonFile = function(){
 
 var jsonUrl = document.getElementById('jsonURL');
@@ -28,23 +37,6 @@ $.each(result,function(i,field){
 });
 };
 
-var refreshInterval = function(value){
-if (value == 'disable'){
-
-}
-else{
-    var integer = 1000;
-    setTimeout(updateData, integer);
-    refreshInterval(integer);
-    }
-    };
-
-var updateData = function(){
-for (var i = 0; i< array.length; i++){
-console.log(array[i]);
-}
-};
-
 var displayValue = function(value){
 value = Number(value);
 if (value === -1){
@@ -58,6 +50,7 @@ createBr(ele);
 };
 
 var createOptions = function(key){
+//displays all the keys from the json file.
     daySelect = document.getElementById('data');
     myOption = document.createElement("option");
     myOption.innerHTML = key;
@@ -66,9 +59,9 @@ var createOptions = function(key){
     };
 
 var addMoreText = function(){
+//allows the user to add their own information to the website.
 createEverything('add new data');
 createEditB();
-createDelB();
 createBr(ele);
 count = count + 1;
 };
@@ -246,4 +239,5 @@ var createEverything = function(value){
            createSpan(value);
            createInput(value);
            changeFontButton();
+           createDelB();
    };

@@ -6,7 +6,7 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
-<body > 
+<body onload = 'Load()'> 
 <div id = 'mod'>
 <span>font size: </span>
 <select id = 'fontSize'>
@@ -28,7 +28,7 @@
     <button id = 'json' onclick = 'JsonFile()'>submit</button>
 <br>
 <span> refresh interval:</span>
-<select onchange = 'refreshInterval(value)'>
+<select >
     <option value = 'disabled'selected>disabled</option>
     <option value = '10'>10</option>
     <option value = '30' >30</option>
@@ -40,10 +40,6 @@
     <option value = '-1' selected>null</option>
 </select>
 </div>
-<div id = "image">
-    <img src = 'http://cam.aprsworld.com/boswell0/latest.jpg' style = 'width: 600px; height: 400px'>
-</div>
-<div id = 'txt'></div>
 </body>
 <script src = '../js/overLayOnImage.js'>
 </script>
