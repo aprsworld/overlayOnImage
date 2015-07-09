@@ -27,8 +27,15 @@ Func();
 var Func = function(){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
+    if(i !== 'camFileURL0'){
   console.log(i);
-  createOptions(i);
+  createOptions(i +  ': ' + field);
+  }
+  else {
+createImage(field);
+createBr(image);
+createAForImage(field);
+  }
 });
 });
 };
@@ -41,7 +48,7 @@ else{
 console.log(value);
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
-if(i === value){
+if(i + ': ' + field === value){
 console.log(i);
 console.log(field);
 createEverything(i + ': ' + field, i);
@@ -54,11 +61,27 @@ else{
 });
 }
 };
+var updateInformation = function(value){
+getJSON(ImportedJsonData, function(result){
+$.each(result,function(i,field){
 
-var refreshInterval = function(value){
- 
+if(i === value){
+console.log(i);
+console.log(field);
+createSpan(i + ': ' + field, i);
+createInput(i + ': ' + field, i);
+createBr(ele);
+}
+else{
+
+}
+});
+});
+setTimeout(updateInformation(value),refreshInterval(value));
 };
-
+var refreshInterval = function(value){
+var timer = Number(value) *1000;
+};
 var createOptions = function(key){
 //displays all the keys from the json file.
     daySelect = document.getElementById('data');
@@ -84,6 +107,13 @@ var createEverything = function(value, clas){
 idNumber = idNumber + 1;
    };
 //all functions that build elements on the webpage need to be saved in a new file. 
+var createAForImage = function(imageURL){
+    var a = document.createElement('a');
+        a.href = imageURL;
+        a.innerHTML = 'Live Video';
+    var imageDiv = document.getElementById('image');
+        imageDiv.appendChild(a);
+        };
 var createImage = function(imageURL, keyID){
     var image1 = document.createElement('img');
         image1.src = imageURL;
@@ -92,9 +122,6 @@ var createImage = function(imageURL, keyID){
         image1.style.height = '400px';
     var imageDiv = document.getElementById('image');
         imageDiv.appendChild(image1);
-	       $(function(){
-                   $('#image').draggable();
-                     });
         };
 var createSpan = function(text, clas){
 //create span node
