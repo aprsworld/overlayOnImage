@@ -1,11 +1,11 @@
-var count = 0;
+var idNumber = 0;
 var ele = document.getElementById('mod');
 var image;
 var element;
-var inputOffset = 2000000;
-var spanOffset = 1000000;
-var delbutOffset = 3000000;
-var fontbutOffset = 4000000;
+var inputOffset = 2000000000;
+var spanOffset = 1000000000;
+var delbutOffset = 3000000000;
+var fontbutOffset = 4000000000;
 var Count = 0;
 var keyArray = [];
 var array = [];
@@ -19,8 +19,8 @@ var Load = function(){
         element.id = 'txt';
         document.body.appendChild(element);
  };
+ 
 var JsonFile = function(){
-
 var jsonUrl = document.getElementById('jsonURL');
 ImportedJsonData = jsonUrl.value;
 Func();
@@ -29,24 +29,36 @@ Func();
 var Func = function(){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
-  array.push(field);
   console.log(i);
   createOptions(i);
-  count = count +1;
 });
 });
 };
 
 var displayValue = function(value){
-value = Number(value);
-if (value === -1){
+if (value === '-1'){
 alert('no value');
 }
 else{
 console.log(value);
-createEverything(array[value]);
+$.getJSON(ImportedJsonData, function(result){
+$.each(result,function(i,field){
+if(i === value){
+console.log(i);
+console.log(field);
+createEverything(i + ': ' + field, i);
 createBr(ele);
 }
+else{
+
+}
+});
+});
+}
+};
+
+var refreshInterval = function(value){
+ 
 };
 
 var createOptions = function(key){
@@ -54,50 +66,70 @@ var createOptions = function(key){
     daySelect = document.getElementById('data');
     myOption = document.createElement("option");
     myOption.innerHTML = key;
-    myOption.value = count;
+    myOption.value = key;
     daySelect.appendChild(myOption);
     };
 
 var addMoreText = function(){
 //allows the user to add their own information to the website.
-createEverything('add new data');
-createEditB();
+createEverything('add new data', idNumber);
 createBr(ele);
-count = count + 1;
+idNumber = idNumber + 1;
 };
 
-var createSpan = function(text){
+var createEverything = function(value,ID){
+           createSpan(value, ID);
+           createInput(value, ID);
+           changeFontButton(ID);
+           createDelB(ID);
+           createEditB(ID);
+
+   };
+//all functions that build elements on the webpage need to be saved in a new file. 
+var createImage = function(imageURL, keyID){
+    var image1 = document.createElement('img');
+        image1.src = imageURL;
+        image1.id = keyID;
+        image1.style.width = '600px';
+        image1.style.height = '400px';
+    var imageDiv = document.getElementById('image');
+        imageDiv.appendChild(image1);
+	       $(function(){
+                   $('#image').draggable();
+                     });
+        };
+var createSpan = function(text,ID){
 //create span node
 	var span = document.createElement("span");
 	var node = document.createTextNode(text);
 		span.appendChild(node);
 		span.className = "texts";
-		span.id = count + spanOffset;		   
+		span.id = idNumber + spanOffset;		   
 	console.log('created span  node');
 		element.appendChild(span);
 	       $(function(){
                    $('.texts').draggable();
                      });
-		createBr(element);		
+   createBr(element);
 };
 
-var createInput = function(text){
+var createInput = function(text, ID){
 //create input node
 	 var inp = document.createElement("input");
 		inp.type = "text";
 		inp.className = "modify";
 		inp.value =text;
-		inp.id = count + inputOffset;
+		inp.id = ID + inputOffset;
 	console.log('created input node');
 	        ele.appendChild(inp);
 	
 };
 
-var createEditB = function(){
+var createEditB = function(ID){
 // create edit button associated with input node
 	 var but = document.createElement("button");
 		but.className = "modify";
-		but.id = count;	
+		but.id = ID;
 		but.innerHTML = "edit";
 		but.addEventListener('click', function() {
         editSpan(but.id);
@@ -118,11 +150,11 @@ var editSpan = function(ButID){
 	
 };
 
-var createDelB = function(){
+var createDelB = function(ID){
 // create remove button associated with input node
 	var rembut = document.createElement("button");
 		rembut.className = "modify";
-		rembut.id = count + delbutOffset;	
+		rembut.id = ID + delbutOffset;	
 console.log('create rembut');
 		rembut.innerHTML = "remove";
 		rembut.addEventListener('click',function(){
@@ -138,11 +170,11 @@ var createBr = function(div){
 	
 };
 
-var changeFontButton = function() {
+var changeFontButton = function(ID) {
 // create a change font button
 	var fontbut = document.createElement("button");
 		fontbut.className = "modify";
-		fontbut.id = count + fontbutOffset;	
+		fontbut.id = ID + fontbutOffset;	
 console.log('create fontbut');
 		fontbut.innerHTML = " edit font";
 		fontbut.addEventListener('click', function(){
@@ -235,9 +267,3 @@ var del = function(delbutID){
     delet.remove();
 };
 
-var createEverything = function(value){
-           createSpan(value);
-           createInput(value);
-           changeFontButton();
-           createDelB();
-   };
