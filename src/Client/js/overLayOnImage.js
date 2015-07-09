@@ -7,8 +7,6 @@ var spanOffset = 1000000000;
 var delbutOffset = 3000000000;
 var fontbutOffset = 4000000000;
 var Count = 0;
-var keyArray = [];
-var array = [];
 var ImportedJsonData;
 
 var Load = function(){
@@ -72,18 +70,18 @@ var createOptions = function(key){
 
 var addMoreText = function(){
 //allows the user to add their own information to the website.
-createEverything('add new data', idNumber);
+console.log('addmoretext');
+createEverything('add new data', 'data');
 createBr(ele);
-idNumber = idNumber + 1;
 };
 
-var createEverything = function(value,ID){
-           createSpan(value, ID);
-           createInput(value, ID);
-           changeFontButton(ID);
-           createDelB(ID);
-           createEditB(ID);
-
+var createEverything = function(value, clas){
+           createSpan(value, clas);
+           createInput(value, clas);
+           changeFontButton(clas);
+           createDelB(clas);
+           createEditB(clas);
+idNumber = idNumber + 1;
    };
 //all functions that build elements on the webpage need to be saved in a new file. 
 var createImage = function(imageURL, keyID){
@@ -98,38 +96,38 @@ var createImage = function(imageURL, keyID){
                    $('#image').draggable();
                      });
         };
-var createSpan = function(text,ID){
+var createSpan = function(text, clas){
 //create span node
 	var span = document.createElement("span");
 	var node = document.createTextNode(text);
 		span.appendChild(node);
-		span.className = "texts";
+		span.className = clas;
 		span.id = idNumber + spanOffset;		   
 	console.log('created span  node');
 		element.appendChild(span);
 	       $(function(){
-                   $('.texts').draggable();
+                   $('.' + clas).draggable();
                      });
    createBr(element);
 };
 
-var createInput = function(text, ID){
+var createInput = function(text, clas){
 //create input node
 	 var inp = document.createElement("input");
 		inp.type = "text";
-		inp.className = "modify";
+		inp.className = clas;
 		inp.value =text;
-		inp.id = ID + inputOffset;
+		inp.id = idNumber + inputOffset;
 	console.log('created input node');
 	        ele.appendChild(inp);
 	
 };
 
-var createEditB = function(ID){
+var createEditB = function(clas){
 // create edit button associated with input node
 	 var but = document.createElement("button");
-		but.className = "modify";
-		but.id = ID;
+		but.className = clas;
+		but.id = idNumber;
 		but.innerHTML = "edit";
 		but.addEventListener('click', function() {
         editSpan(but.id);
@@ -150,11 +148,11 @@ var editSpan = function(ButID){
 	
 };
 
-var createDelB = function(ID){
+var createDelB = function(clas){
 // create remove button associated with input node
 	var rembut = document.createElement("button");
-		rembut.className = "modify";
-		rembut.id = ID + delbutOffset;	
+		rembut.className = clas;
+		rembut.id = idNumber + delbutOffset;	
 console.log('create rembut');
 		rembut.innerHTML = "remove";
 		rembut.addEventListener('click',function(){
@@ -170,11 +168,11 @@ var createBr = function(div){
 	
 };
 
-var changeFontButton = function(ID) {
+var changeFontButton = function(clas) {
 // create a change font button
 	var fontbut = document.createElement("button");
-		fontbut.className = "modify";
-		fontbut.id = ID + fontbutOffset;	
+		fontbut.className = clas;
+		fontbut.id = idNumber + fontbutOffset;	
 console.log('create fontbut');
 		fontbut.innerHTML = " edit font";
 		fontbut.addEventListener('click', function(){
