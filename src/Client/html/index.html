@@ -28,12 +28,13 @@
     <button id = 'json' onclick = 'JsonFile()'>submit</button>
 <br>
 <span> refresh interval:</span>
-<select onchange = 'updateInformation(value)'>
+<select onchange = 'refreshInterval(value)'>
     <option value = 'disabled' selected>disabled</option>
     <option value = '10'>10</option>
     <option value = '30' >30</option>
     <option value = '60'>60</option>
 </select>
+<button onclick = 'updateInformation()'> timer</button>
 <br>
 <span> Data </span>
 <select id = 'data' onchange = 'displayValue(value)'>

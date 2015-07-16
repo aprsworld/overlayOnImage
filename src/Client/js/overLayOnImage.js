@@ -1,3 +1,10 @@
+/* Things that still need to be done
+ *  update the image on a interval time
+ *  update the span, input, and the buttons on an interval without changing their id's
+ *  allow the user to only change the font of certain characters in the input fields
+ *  get the refresh interval to work
+ *  catch incorrect input data for the json textfield (incorrect meaning that it gives me 'get requests not found' or a 'cors error'
+ *  */
 var idNumber = 0;
 var ele = document.getElementById('mod');
 var image;
@@ -8,6 +15,7 @@ var delbutOffset = 3000000000;
 var fontbutOffset = 4000000000;
 var Count = 0;
 var ImportedJsonData;
+var divCounter = 0;
 
 var Load = function(){
      image = document.createElement('div');
@@ -29,10 +37,10 @@ $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
     if(i !== 'camFileURL0'){
   console.log(i);
-  createOptions(i +  ': ' + field, i);
+  createOptions(i);
   }
   else {
-createImage(field);
+createImage(field, i);
 createBr(image);
 createAForImage(field);
   }
@@ -45,7 +53,7 @@ if (value === '-1'){
 alert('no value');
 }
 else{
-//console.log(value);
+console.log(value);
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
 if(value === i){
@@ -61,33 +69,20 @@ else{
 });
 }
 };
-var updateInformation = function(value){
-getJSON(ImportedJsonData, function(result){
-$.each(result,function(i,field){
-
-if(i === value){
-console.log(i);
-console.log(field);
-createSpan(i + ': ' + field, i);
-createInput(i + ': ' + field, i);
-createBr(ele);
-}
-else{
-
-}
-});
-});
-setTimeout(updateInformation(value),refreshInterval(value));
+var updateInformation = function(){
+replace();
 };
-var refreshInterval = function(value){
-var timer = Number(value) *1000;
+var refreshInterval = function(){
+//var timer = Number(value) * 1000;
+updateInformation(ele);
 };
-var createOptions = function(key, i){
+
+var createOptions = function(key){
 //displays all the keys from the json file.
     daySelect = document.getElementById('data');
     myOption = document.createElement("option");
     myOption.innerHTML = key;
-    myOption.value = i;
+    myOption.value = key;
     daySelect.appendChild(myOption);
     };
 
@@ -290,5 +285,23 @@ var del = function(delbutID){
     edit.remove();
     font.remove();
     delet.remove();
+};
+var replace = function(){
+/*first we will remove the image  */
+$.getJSON(ImportedJsonData, function(result){
+$.each(result,function(i, field){
+    if(i !== 'camFileURL0'){
+var Input = document.getElementsByClassName(i);
+    Input.value =  field;
+    console.log('span and input updated');
+
+}
+    else{
+var image = document.getElementById(i);
+    image.src = field;
+    console.log('image updated');
+}
+});
+});
 };
 
