@@ -31,15 +31,8 @@ Func();
 var Func = function(){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
-    if(i !== 'camFileURL0'){
   console.log(i);
   createOptions(i);
-  }
-  else {
-createImage(field, i);
-createBr(image);
-createAForImage(field);
-  }
 });
 });
 };
@@ -52,11 +45,25 @@ else{
 console.log(value);
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
-if(value === i){
+ if(value === i){
+    if(value === 'camURLPrimary0'){
+        createImage(field,i);
+        createBr(image);
+        createAForImage(field);
+        createBr(image);
+        }
+    else if (value === 'camFileURL0'){
+        createImage(field,i);
+        createBr(image);
+        createAForImage(field);
+        createBr(image);
+        }
+   else{
 console.log(i);
 console.log(field);
-createEverything(i + ': ' + field, i);
+createEverything(field, i);
 createBr(ele);
+}
 }
 else{
 
@@ -84,7 +91,7 @@ var createOptions = function(key){
 
 var addMoreText = function(){
 //allows the user to add their own information to the website.
-console.log('addmoretext');
+console.log('add more text');
 createEverything('add new data', 'data');
 createBr(ele);
 };
@@ -95,6 +102,7 @@ var createEverything = function(value, clas){
            createEditB(clas);
            createDelB(clas);
            changeFontButton(clas);
+           idNumber = idNumber + 5;
    };
 
 //all functions that build elements on the webpage need to be saved in a new file. 
@@ -120,7 +128,7 @@ var createSpan = function(text, clas){
 	var span = document.createElement("span");
 	var node = document.createTextNode(text);
 		span.appendChild(node);
-		span.className = clas;
+        span.className = clas;
 		span.id = idNumber;		   
 	console.log('created span  node');
 		element.appendChild(span);
@@ -134,7 +142,6 @@ var createInput = function(text, clas){
 //create input node
 	 var inp = document.createElement("input");
 		inp.type = "text";
-		inp.className = clas;
 		inp.value =text;
 		inp.id = idNumber + 1 ;
 	console.log('created input node');
@@ -145,7 +152,6 @@ var createInput = function(text, clas){
 var createEditB = function(clas){
 // create edit button associated with input node
 	 var but = document.createElement("button");
-		but.className = clas;
 		but.id = idNumber + 2;
 		but.innerHTML = "edit";
 		but.addEventListener('click', function() {
