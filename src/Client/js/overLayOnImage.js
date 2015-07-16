@@ -29,7 +29,7 @@ $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
     if(i !== 'camFileURL0'){
   console.log(i);
-  createOptions(i +  ': ' + field);
+  createOptions(i +  ': ' + field, i);
   }
   else {
 createImage(field);
@@ -45,10 +45,10 @@ if (value === '-1'){
 alert('no value');
 }
 else{
-console.log(value);
+//console.log(value);
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
-if(i + ': ' + field === value){
+if(value === i){
 console.log(i);
 console.log(field);
 createEverything(i + ': ' + field, i);
@@ -82,12 +82,12 @@ setTimeout(updateInformation(value),refreshInterval(value));
 var refreshInterval = function(value){
 var timer = Number(value) *1000;
 };
-var createOptions = function(key){
+var createOptions = function(key, i){
 //displays all the keys from the json file.
     daySelect = document.getElementById('data');
     myOption = document.createElement("option");
     myOption.innerHTML = key;
-    myOption.value = key;
+    myOption.value = i;
     daySelect.appendChild(myOption);
     };
 
