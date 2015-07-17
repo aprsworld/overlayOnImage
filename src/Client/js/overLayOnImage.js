@@ -11,6 +11,7 @@ var image;
 var element;
 var Count = 0;
 var ImportedJsonData;
+var ImportedImageData;
 var divCounter = 0;
 
 var Load = function(){
@@ -36,6 +37,11 @@ $.each(result,function(i,field){
 });
 });
 };
+var DisplayImage = function(){
+    var images = document.getElementById('imageURL');
+        ImportedImageData = images.value; 
+    console.log(ImportedImageData);
+        };
 
 var displayValue = function(value){
 if (value === '-1'){
@@ -46,24 +52,10 @@ console.log(value);
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
  if(value === i){
-    if(value === 'camURLPrimary0'){
-        createImage(field,i);
-        createBr(image);
-        createAForImage(field);
-        createBr(image);
-        }
-    else if (value === 'camFileURL0'){
-        createImage(field,i);
-        createBr(image);
-        createAForImage(field);
-        createBr(image);
-        }
-   else{
 console.log(i);
 console.log(field);
 createEverything(field, i);
 createBr(ele);
-}
 }
 else{
 
