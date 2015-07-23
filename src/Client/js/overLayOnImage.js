@@ -13,6 +13,7 @@ var Count = 0;
 var ImportedJsonData;
 var ImportedImageData;
 var divCounter = 0;
+var refreshInterval;
 
 var Load = function(){
      imageDiv = document.createElement('div');
@@ -37,6 +38,7 @@ $.each(result,function(i,field){
 });
 });
 };
+
 var DisplayImage = function(){
     var imageUrl = document.getElementById('imageURL');
         ImportedImageData = imageUrl.value; 
@@ -64,13 +66,6 @@ else{
 });
 }
 };
-var updateInformation = function(){
-replace();
-};
-var refreshInterval = function(){
-//var timer = Number(value) * 1000;
-updateInformation(inputDiv);
-};
 
 var createOptions = function(key){
 //displays all the keys from the json file.
@@ -89,12 +84,12 @@ createBreak(inputDiv);
 };
 
 var createEverything = function(value, clas){
-           createSpan(value, clas);
-           createInput(value, clas);
-           createEditButton(clas);
-           createDeleteButton(clas);
-           changeFontButton(clas);
-           idNumber = idNumber + 5;
+       createSpan(value, clas);
+       createInput(value, clas);
+       createEditButton(clas);
+       createDeleteButton(clas);
+       changeFontButton(clas);
+       idNumber = idNumber + 5;
    };
 
 //all functions that build elements on the webpage need to be saved in a new file. 
@@ -134,6 +129,7 @@ var createInput = function(text, clas){
 	 var newInput = document.createElement("input");
 		newInput.type = "text";
 		newInput.value =text;
+        newInput.className = clas;
 		newInput.id = idNumber + 1 ;
 	console.log('created input node');
 	        inputDiv.appendChild(newInput);
@@ -265,12 +261,30 @@ var remove = function(deleteButtonID){
     font.remove();
     delet.remove();
 };
-var replace = function(){
-/*first we will remove the image  */
+
+// need to incorporate these functions with my code a little more. I took this code from a different js file. 
+
+var updateInfo = function(){
+var refreshJsonData = document.getElementById('timer');
+var AllOfTheSpans = document.getElementbyId('span');
+if(refreshJsonData.options[refreshJsonData.selectedIndex].value !== 'null'){
 $.getJSON(ImportedJsonData, function(result){
-$.each(result,function(i, field){
+$.each(result,function(i,field){
 
 });
 });
+setTimeout(updateInfo, refreshInterval);
+}
+else{
+console.log('counter should not continue to increase');
+}
 };
-
+var timer = function(value){
+if(value !== 'null'){
+refreshInterval = Number(value) * 1000;
+console.log(refreshInterval + 'ms');
+}
+else{
+console.log('there is no refresh interval');
+}
+};
