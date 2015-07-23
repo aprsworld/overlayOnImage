@@ -266,11 +266,18 @@ var remove = function(deleteButtonID){
 
 var updateInfo = function(){
 var refreshJsonData = document.getElementById('timer');
-var AllOfTheSpans = document.getElementbyId('span');
+var spanDiv = document.getElementbyId('span');
 if(refreshJsonData.options[refreshJsonData.selectedIndex].value !== 'null'){
 $.getJSON(ImportedJsonData, function(result){
-$.each(result,function(i,field){
-
+$.each(result, function(key,newValue){
+//need to get this logic to work.
+for (var span in spanDiv){
+    if(span.className === key){
+        if(Number(span.id)%5 === 2){
+        span.replace(span.value, newValue);
+        }
+        }
+}
 });
 });
 setTimeout(updateInfo, refreshInterval);
