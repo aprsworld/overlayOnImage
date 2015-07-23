@@ -38,9 +38,9 @@ $.each(result,function(i,field){
 });
 };
 var DisplayImage = function(){
-    var images = document.getElementById('imageURL');
-        ImportedImageData = images.value; 
-    console.log(ImportedImageData);
+    var imageUrl = document.getElementById('imageURL');
+        ImportedImageData = imageUrl.value; 
+    createImage(ImportedImageData);
         };
 
 var displayValue = function(value){
@@ -106,10 +106,9 @@ var createAForImage = function(imageURL){
     var imageDiv = document.getElementById('image');
         imageDiv.appendChild(a);
         };
-var createImage = function(imageURL, keyID){
+var createImage = function(imageURL){
     var image1 = document.createElement('img');
         image1.src = imageURL;
-        image1.id = keyID;
         image1.style.width = '600px';
         image1.style.height = '400px';
     var imageDiv = document.getElementById('image');
