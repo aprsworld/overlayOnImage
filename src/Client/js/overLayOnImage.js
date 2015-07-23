@@ -6,21 +6,21 @@
  *  catch incorrect input data for the json textfield (incorrect meaning that it gives me 'get requests not found' or a 'cors error'
  *  */
 var idNumber = 0;
-var ele = document.getElementById('input');
-var image;
-var element;
+var inputDiv = document.getElementById('input');
+var imageDiv;
+var spanDiv;
 var Count = 0;
 var ImportedJsonData;
 var ImportedImageData;
 var divCounter = 0;
 
 var Load = function(){
-     image = document.createElement('div');
-        image.id = 'image';
-        document.body.appendChild(image);
-     element = document.createElement('div');
-        element.id = 'span';
-        document.body.appendChild(element);
+     imageDiv = document.createElement('div');
+        imageDiv.id = 'image';
+        document.body.appendChild(imageDiv);
+     spanDiv = document.createElement('div');
+        spanDiv.id = 'span';
+        document.body.appendChild(spanDiv);
  };
  
 var JsonFile = function(){
@@ -55,7 +55,7 @@ $.each(result,function(i,field){
 console.log(i);
 console.log(field);
 createEverything(field, i);
-createBr(ele);
+createBreak(inputDiv);
 }
 else{
 
@@ -69,7 +69,7 @@ replace();
 };
 var refreshInterval = function(){
 //var timer = Number(value) * 1000;
-updateInformation(ele);
+updateInformation(inputDiv);
 };
 
 var createOptions = function(key){
@@ -85,14 +85,14 @@ var addMoreText = function(){
 //allows the user to add their own information to the website.
 console.log('add more text');
 createEverything('add new data', 'data');
-createBr(ele);
+createBreak(inputDiv);
 };
 
 var createEverything = function(value, clas){
            createSpan(value, clas);
            createInput(value, clas);
-           createEditB(clas);
-           createDelB(clas);
+           createEditButton(clas);
+           createDeleteButton(clas);
            changeFontButton(clas);
            idNumber = idNumber + 5;
    };
@@ -100,161 +100,164 @@ var createEverything = function(value, clas){
 //all functions that build elements on the webpage need to be saved in a new file. 
 
 var createAForImage = function(imageURL){
-    var a = document.createElement('a');
-        a.href = imageURL;
-        a.innerHTML = 'Live Video';
-    var imageDiv = document.getElementById('image');
-        imageDiv.appendChild(a);
+    var newAttribute = document.createElement('a');
+        newAttribute.href = imageURL;
+        newAttribute.innerHTML = 'Live Video';
+    var getImageDiv = document.getElementById('image');
+        getImageDiv.appendChild(newAttribute);
         };
 var createImage = function(imageURL){
-    var image1 = document.createElement('img');
-        image1.src = imageURL;
-        image1.style.width = '600px';
-        image1.style.height = '400px';
-    var imageDiv = document.getElementById('image');
-        imageDiv.appendChild(image1);
+    var newImage = document.createElement('img');
+        newImage.src = imageURL;
+        newImage.style.width = '600px';
+        newImage.style.height = '400px';
+    var getImageDiv = document.getElementById('image');
+        getImageDiv.appendChild(newImage);
         };
 var createSpan = function(text, clas){
 //create span node
-	var span = document.createElement("span");
-	var node = document.createTextNode(text);
-		span.appendChild(node);
-        span.className = clas;
-		span.id = idNumber;		   
+	var newSpan = document.createElement("span");
+	var newNode = document.createTextNode(text);
+		newSpan.appendChild(newNode);
+        newSpan.className = clas;
+		newSpan.id = idNumber;		   
 	console.log('created span  node');
-		element.appendChild(span);
+		spanDiv.appendChild(newSpan);
 	       $(function(){
                    $('.' + clas).draggable();
                      });
-   createBr(element);
+   createBreak(spanDiv);
 };
 
 var createInput = function(text, clas){
 //create input node
-	 var inp = document.createElement("input");
-		inp.type = "text";
-		inp.value =text;
-		inp.id = idNumber + 1 ;
+	 var newInput = document.createElement("input");
+		newInput.type = "text";
+		newInput.value =text;
+		newInput.id = idNumber + 1 ;
 	console.log('created input node');
-	        ele.appendChild(inp);
+	        inputDiv.appendChild(newInput);
 	
 };
 
-var createEditB = function(clas){
+var createEditButton = function(clas){
 // create edit button associated with input node
-	 var but = document.createElement("button");
-		but.id = idNumber + 2;
-		but.innerHTML = "edit";
-		but.addEventListener('click', function() {
-        editSpan(but.id);
+	 var newEditButton = document.createElement("button");
+		newEditButton.id = idNumber + 2;
+		newEditButton.innerHTML = "edit";
+		newEditButton.addEventListener('click', function() {
+        editSpan(newEditButton.id);
 },false);
-		ele.appendChild(but);
+		inputDiv.appendChild(newEditButton);
 };
 
-var editSpan = function(ButID){
-        var idinp = String(Number(ButID) - 1 );
+var editSpan = function(EditButtonID){
+//allow the span element to be edited from it's corresponding input field.
+        var inputID = String(Number(EditButtonID) - 1 );
 				console.log('update text');
-			var idspan = String(Number(ButID) - 2);
-			var spa = document.getElementById(idspan);
-			var inp1 = document.getElementById(idinp);
-            console.log(inp1);
-				spa.innerHTML = inp1.value;
+			var spanID = String(Number(EditButtonID) - 2);
+			var getSpan = document.getElementById(spanID);
+			var getInput = document.getElementById(inputID);
+            console.log(getInput);
+				getSpan.innerHTML = getInput.value;
 };
 
-var createDelB = function(clas){
+var createDeleteButton = function(clas){
 // create remove button associated with input node
-	var rembut = document.createElement("button");
-		rembut.className = clas;
-		rembut.id = idNumber  + 3;	
+	var deleteButton = document.createElement("button");
+		deleteButton.className = clas;
+		deleteButton.id = idNumber  + 3;	
 console.log('create remove button');
-		rembut.innerHTML = "remove";
-		rembut.addEventListener('click',function(){
-      del(rembut.id); 
+		deleteButton.innerHTML = "remove";
+		deleteButton.addEventListener('click',function(){
+      remove(deleteButton.id); 
        }, false);
-		ele.appendChild(rembut);	
+		inputDiv.appendChild(deleteButton);	
 };
 
-var createBr = function(div){
+var createBreak = function(div){
 //create a br element
-	var bre = document.createElement("br");
-		div.appendChild(bre);
+	var newBreak = document.createElement("br");
+		div.appendChild(newBreak);
 	
 };
 
 var changeFontButton = function(clas) {
 // create a change font button
-	var fontbut = document.createElement("button");
-		fontbut.className = clas;
-		fontbut.id = idNumber + 4 ;	
+	var fontbutton = document.createElement("button");
+		fontbutton.className = clas;
+		fontbutton.id = idNumber + 4 ;	
 console.log('create font button');
-		fontbut.innerHTML = " edit font";
-		fontbut.addEventListener('click', function(){
-        changeFontSize(fontbut.id);
+		fontbutton.innerHTML = " edit font";
+		fontbutton.addEventListener('click', function(){
+        changeFontSize(fontbutton.id);
         }, false);
-		ele.appendChild(fontbut);	
+		inputDiv.appendChild(fontbutton);	
 };
 
-var changeFontSize = function(FontbutId){
+var changeFontSize = function(FontButtonID){
 //change font size for text 
+    var SpanText = FontButtonID - 4;
+    var InputValue = FontButtonID - 3;
 	var selectFont = document.getElementById("fontSize");
 		if(selectFont !== null){
 	selectFontValue = selectFont.options[selectFont.selectedIndex].value;
 console.log(selectFontValue);
         if (selectFontValue == '10') {
-            document.getElementById(FontbutId -4).style.font = " 10px arial,serif";
-            document.getElementById(FontbutId -3).style.font = " 10px arial,serif";
+            document.getElementById(SpanText).style.font = " 10px arial,serif";
+            document.getElementById(InputValue).style.font = " 10px arial,serif";
         }
         else if (selectFontValue == 14) {
-            document.getElementById(FontbutId -4).style.font = "14px arial,serif";
-            document.getElementById(FontbutId -3).style.font = "14px arial,serif";
+            document.getElementById(SpanText).style.font = "14px arial,serif";
+            document.getElementById(InputValue).style.font = "14px arial,serif";
         }
         else if (selectFontValue == '16') {
-            document.getElementById(FontbutId -4).style.font = " 16px arial,serif";
-            document.getElementById(FontbutId -3).style.font = " 16px arial,serif";
+            document.getElementById(SpanText).style.font = " 16px arial,serif";
+            document.getElementById(InputValue).style.font = " 16px arial,serif";
         }
         else if (selectFontValue == 18) {
-            document.getElementById(FontbutId -4).style.font = "18px arial,serif";
-            document.getElementById(FontbutId -3).style.font = "18px arial,serif";
+            document.getElementById(SpanText).style.font = "18px arial,serif";
+            document.getElementById(InputValue).style.font = "18px arial,serif";
         }
         else if (selectFontValue == '20') {
-            document.getElementById(FontbutId -4).style.font = " 20px arial,serif";
-            document.getElementById(FontbutId -3).style.font = " 20px arial,serif";
+            document.getElementById(SpanText).style.font = " 20px arial,serif";
+            document.getElementById(InputValue).style.font = " 20px arial,serif";
         }
         else if (selectFontValue == 24) {
-            document.getElementById(FontbutId -4).style.font = "24px arial,serif";
-            document.getElementById(FontbutId -3).style.font = "24px arial,serif";
+            document.getElementById(SpanText).style.font = "24px arial,serif";
+            document.getElementById(InputValue).style.font = "24px arial,serif";
         }
         else if (selectFontValue == '28') {
-            document.getElementById(FontbutId -4).style.font = " 28px arial,serif";
-            document.getElementById(FontbutId -3).style.font = " 28px arial,serif";
+            document.getElementById(SpanText).style.font = " 28px arial,serif";
+            document.getElementById(InputValue).style.font = " 28px arial,serif";
         }
         else if (selectFontValue == 32) {
-            document.getElementById(FontbutId -4).style.font = "32px arial,serif";
-            document.getElementById(FontbutId -3).style.font = "32px arial,serif";
+            document.getElementById(SpanText).style.font = "32px arial,serif";
+            document.getElementById(InputValue).style.font = "32px arial,serif";
         }
         else if (selectFontValue == '36') {
-            document.getElementById(FontbutId -4).style.font = " 36px arial,serif";
-            document.getElementById(FontbutId -3).style.font = " 36px arial,serif";
+            document.getElementById(SpanText).style.font = " 36px arial,serif";
+            document.getElementById(InputValue).style.font = " 36px arial,serif";
         }
         else {
-            document.getElementById(FontbutId -4).style.font = " 12px arial,serif";
-            document.getElementById(FontbutId -3).style.font = " 12px arial,serif";
+            document.getElementById(SpanText).style.font = " 12px arial,serif";
+            document.getElementById(InputValue).style.font = " 12px arial,serif";
         }
     }
 };
 
-var del = function(delbutID){
-    console.log(delbutID);
-    var inputId = delbutID - 2;
-    var spanId = delbutID - 3;
-    var editId = delbutID - 1;
-    var fontbutID =Number(delbutID) + 1;
+var remove = function(deleteButtonID){
+    console.log(deleteButtonID);
+    var inputElementID = deleteButtonID - 2;
+    var spanElementId = deleteButtonID - 3;
+    var editElementID = deleteButtonID - 1;
+    var fontButtonID =Number(deleteButtonID) + 1;
 
-    var input = document.getElementById(inputId);
-    var span = document.getElementById(spanId);
-    var edit = document.getElementById(editId);
-    var font = document.getElementById(fontbutID);
-    var delet = document.getElementById(delbutID);
+    var input = document.getElementById(inputElementID);
+    var span = document.getElementById(spanElementId);
+    var edit = document.getElementById(editElementID);
+    var font = document.getElementById(fontButtonID);
+    var delet = document.getElementById(deleteButtonID);
     
     input.remove();
     span.remove();
@@ -266,16 +269,7 @@ var replace = function(){
 /*first we will remove the image  */
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i, field){
-    if(i !== 'camFileURL0'){
-var Input = document.getElementsByClassName(i);
-    Input.innerHTML = field;
-    console.log('span and input updated');
-}
-    else{
-var image = document.getElementById(i);
-    image.src = field;
-    console.log('image updated');
-}
+
 });
 });
 };
