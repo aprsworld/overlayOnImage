@@ -270,7 +270,9 @@ var spanDiv = document.getElementbyId('span');
 if(refreshJsonData.options[refreshJsonData.selectedIndex].value !== 'null'){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result, function(key,newValue){
+
 //need to get this logic to work.
+
 for (var span in spanDiv){
     if(span.className === key){
         if(Number(span.id)%5 === 2){
@@ -283,15 +285,16 @@ for (var span in spanDiv){
 setTimeout(updateInfo, refreshInterval);
 }
 else{
-console.log('counter should not continue to increase');
+console.log('data will not update');
 }
 };
+
 var timer = function(value){
 if(value !== 'null'){
 refreshInterval = Number(value) * 1000;
 console.log(refreshInterval + 'ms');
 }
 else{
-console.log('there is no refresh interval');
+console.log('no refresh interval');
 }
 };
