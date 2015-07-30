@@ -1,9 +1,7 @@
 /* Things that still need to be done
- *  update the image on a interval time
- *  update the span, input, and the buttons on an interval without changing their id's
- *  allow the user to only change the font of certain characters in the input fields
- *  get the refresh interval to work
+ *  update the image on a interval time (if needed)
  *  catch incorrect input data for the json textfield (incorrect meaning that it gives me 'get requests not found' or a 'cors error'
+ *  
  *  */
 var idNumber = 0;
 var inputDiv = document.getElementById('input');
@@ -17,6 +15,8 @@ var refreshInterval;
 var inputDivCount = 0;
 
 var Load = function(){
+/*This function is created to allow the user to populate a blank webpage with a given set of tools.
+ * This function still has a lot of work to be done.*/
      imageDiv = document.createElement('div');
         imageDiv.id = 'image';
         document.body.appendChild(imageDiv);
@@ -24,14 +24,10 @@ var Load = function(){
         spanDiv.id = 'span';
         document.body.appendChild(spanDiv);
  };
- 
 var JsonFile = function(){
+//This function loads the json data from the external server and creates options for the user to use. 
 var jsonUrl = document.getElementById('jsonURL');
 ImportedJsonData = jsonUrl.value;
-Func();
-};
-
-var Func = function(){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
   console.log(i);
@@ -40,13 +36,14 @@ $.each(result,function(i,field){
 });
 };
 var DisplayImage = function(){
+//creates and displays an image onto the webpages from a given URL.
     var imageUrl = document.getElementById('imageURL');
         ImportedImageData = imageUrl.value; 
     createImage(ImportedImageData);
         };
-
 var displayValue = function(value){
-if (value === '-1'){
+//creates the input, span elements, and the buttons and assigns the innerHTML and values of the span and input elements to one of the json datas.
+if (value === 'null'){
 alert('no value');
 }
 else{
@@ -60,13 +57,11 @@ createEverything(field, i);
 createBreak(inputDiv);
 }
 else{
-
 }
 });
 });
 }
 };
-
 var createOptions = function(key){
 //displays all the keys from the json file.
     daySelect = document.getElementById('data');
@@ -75,15 +70,14 @@ var createOptions = function(key){
     myOption.value = key;
     daySelect.appendChild(myOption);
     };
-
 var addMoreText = function(){
 //allows the user to add their own information to the website.
 console.log('add more text');
-createEverything('add new data', 'data');
+createEverything('add new data', 'UserCreated');
 createBreak(inputDiv);
 };
-
 var createEverything = function(value, clas){
+//builds the span, input, and buttons.
        createSpan(value, clas);
        createInput(value, clas);
        createEditButton(clas);
@@ -91,10 +85,8 @@ var createEverything = function(value, clas){
        changeFontButton(clas);
        idNumber = idNumber + 5;
    };
-
-//all functions that build elements on the webpage need to be saved in a new file. 
-
 var createAForImage = function(imageURL){
+//create a element for an specific image
     var newAttribute = document.createElement('a');
         newAttribute.href = imageURL;
         newAttribute.innerHTML = 'Live Video';
@@ -102,6 +94,7 @@ var createAForImage = function(imageURL){
         getImageDiv.appendChild(newAttribute);
         };
 var createImage = function(imageURL){
+//create image from given URL
     var newImage = document.createElement('img');
         newImage.src = imageURL;
         newImage.style.width = '600px';
@@ -110,7 +103,7 @@ var createImage = function(imageURL){
         getImageDiv.appendChild(newImage);
         };
 var createSpan = function(text, clas){
-//create span node
+//create span node and gives it draggable features
 	var newSpan = document.createElement("span");
 	var newNode = document.createTextNode(text);
 		newSpan.appendChild(newNode);
@@ -180,7 +173,7 @@ var createBreak = function(div){
 };
 
 var changeFontButton = function(clas) {
-// create a change font button
+// create a change fontsize button
 	var fontbutton = document.createElement("button");
 		fontbutton.className = clas;
 		fontbutton.id = idNumber + 4 ;	
@@ -234,6 +227,7 @@ console.log(selectFontValue);
 };
 
 var remove = function(deleteButtonID){
+//removes the span, input, edit button, remove button, and fontsize button associated with the deleteButtonID value.
     console.log(deleteButtonID);
     var inputElementID = deleteButtonID - 2;
     var spanElementId = deleteButtonID - 3;
@@ -252,18 +246,20 @@ var remove = function(deleteButtonID){
     font.remove();
     delet.remove();
 };
-
-//need to incorporate these functions with my code a little more. I took this code from a different js file. 
-
 var updateInfo = function(){
+//updates the information displayed on the webpage every couple seconds (either 10, 30, or 60 seconds)
 var refreshJsonData = document.getElementById('timer');
 if(refreshJsonData.options[refreshJsonData.selectedIndex].value !== 'null'){
 if(inputDivCount > 0){
 for (var input = 0; input < inputDivCount; input = input + 1){
     var input1 = input * 5 + 1;
     if(document.getElementById(input1) !== null){
+    if(document.getElementById(input1).className !== 'UserCreated'){
     var inputNow = document.getElementById(input1);
     update(inputNow, input1);
+    }
+    else{
+    }
     }
 else{
 console.log('element does not exist');
@@ -281,6 +277,7 @@ console.log('data will not update');
 };
 
 var update = function(InputName, input1){
+//updates to the most recent information for each element. 
 $.getJSON(ImportedJsonData, function(result){
 $.each(result, function(key, newValue){
     if(InputName.className === key){
@@ -294,6 +291,7 @@ $.each(result, function(key, newValue){
 });
 };
 var timer = function(value){
+//controls how often the webpage should poll the server where the json file resides.
 if(value !== 'null'){
 refreshInterval = Number(value) * 1000;
 console.log(refreshInterval + 'ms');
