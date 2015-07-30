@@ -14,6 +14,7 @@ var ImportedJsonData;
 var ImportedImageData;
 var divCounter = 0;
 var refreshInterval;
+var inputDivCount = 0;
 
 var Load = function(){
      imageDiv = document.createElement('div');
@@ -132,7 +133,8 @@ var createInput = function(text, clas){
 		newInput.id = idNumber + 1 ;
 	console.log('created input node');
 	        inputDiv.appendChild(newInput);
-	
+            inputDivCount = inputDivCount + 1; 
+
 };
 
 var createEditButton = function(clas){
@@ -251,30 +253,22 @@ var remove = function(deleteButtonID){
     delet.remove();
 };
 
-// need to incorporate these functions with my code a little more. I took this code from a different js file. 
+//need to incorporate these functions with my code a little more. I took this code from a different js file. 
 
 var updateInfo = function(){
 var refreshJsonData = document.getElementById('timer');
-var inputDiv = document.getElementById('input').getElementsByTagName('input').length;
-console.log(inputDiv);
 if(refreshJsonData.options[refreshJsonData.selectedIndex].value !== 'null'){
-if(inputDiv > 0){
-$.getJSON(ImportedJsonData, function(result){
-$.each(result, function(key,newValue){
-//need to get this logic to work.
-for (var input = 0; input < inputDiv; input = input + 1){
+if(inputDivCount > 0){
+for (var input = 0; input < inputDivCount; input = input + 1){
     var input1 = input * 5 + 1;
+    if(document.getElementById(input1) !== null){
     var inputNow = document.getElementById(input1);
-    if(inputNow.className === key){
-    $(inputNow).val(newValue);
-   editSpan(input1 + 1 + ' '); 
+    update(inputNow, input1);
     }
-    else{
-
+else{
+console.log('element does not exist');
     }
     }
-});
-});
 setTimeout(updateInfo, refreshInterval);
 }
 else{
@@ -286,6 +280,19 @@ console.log('data will not update');
 }
 };
 
+var update = function(InputName, input1){
+$.getJSON(ImportedJsonData, function(result){
+$.each(result, function(key, newValue){
+    if(InputName.className === key){
+    $(InputName).val(newValue);
+    editSpan(input1 + 1); 
+    }
+    else{
+
+    }
+});
+});
+};
 var timer = function(value){
 if(value !== 'null'){
 refreshInterval = Number(value) * 1000;
