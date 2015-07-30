@@ -258,6 +258,7 @@ var refreshJsonData = document.getElementById('timer');
 var inputDiv = document.getElementById('input').getElementsByTagName('input').length;
 console.log(inputDiv);
 if(refreshJsonData.options[refreshJsonData.selectedIndex].value !== 'null'){
+if(inputDiv > 0){
 $.getJSON(ImportedJsonData, function(result){
 $.each(result, function(key,newValue){
 //need to get this logic to work.
@@ -266,7 +267,7 @@ for (var input = 0; input < inputDiv; input = input + 1){
     var inputNow = document.getElementById(input1);
     if(inputNow.className === key){
     $(inputNow).val(newValue);
-    
+   editSpan(input1 + 1 + ' '); 
     }
     else{
 
@@ -275,6 +276,10 @@ for (var input = 0; input < inputDiv; input = input + 1){
 });
 });
 setTimeout(updateInfo, refreshInterval);
+}
+else{
+console.log('There are no elements to update.');
+}
 }
 else{
 console.log('data will not update');
