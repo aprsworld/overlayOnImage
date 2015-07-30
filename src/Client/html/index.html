@@ -31,14 +31,13 @@
     <button id = 'ImageURL' onclick = 'DisplayImage()'>create image </button>
 <br>
 <span> refresh interval:</span>
-<select id = 'timer' onchange = 'refreshInterval(value)'>
+<select id = 'timer' onchange = 'timer(value)'>
     <option value = 'null' selected>null</option>
     <option value = '10'>10</option>
     <option value = '30' >30</option>
     <option value = '60'>60</option>
 </select>
-<button onclick = 'updateInformation()'> timer</button>
-<button onclick = 'updateJsonData()'> test </button>
+<button onclick = 'updateInfo()'> timer</button>
 <br>
 <span> Data </span>
 <select id = 'data' onchange = 'displayValue(value)'>
