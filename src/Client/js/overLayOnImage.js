@@ -35,6 +35,7 @@ $.getJSON(ImportedJsonData, function(result){
 $.each(result,function(i,field){
   console.log(i);
   createOptions(i);
+  
 });
 });
 };
@@ -201,43 +202,33 @@ var changeFontSize = function(FontButtonID){
 console.log(selectFontValue);
         if (selectFontValue == '10') {
             document.getElementById(SpanText).style.font = " 10px arial,serif";
-            document.getElementById(InputValue).style.font = " 10px arial,serif";
         }
         else if (selectFontValue == 14) {
             document.getElementById(SpanText).style.font = "14px arial,serif";
-            document.getElementById(InputValue).style.font = "14px arial,serif";
         }
         else if (selectFontValue == '16') {
             document.getElementById(SpanText).style.font = " 16px arial,serif";
-            document.getElementById(InputValue).style.font = " 16px arial,serif";
         }
         else if (selectFontValue == 18) {
             document.getElementById(SpanText).style.font = "18px arial,serif";
-            document.getElementById(InputValue).style.font = "18px arial,serif";
         }
         else if (selectFontValue == '20') {
             document.getElementById(SpanText).style.font = " 20px arial,serif";
-            document.getElementById(InputValue).style.font = " 20px arial,serif";
         }
         else if (selectFontValue == 24) {
             document.getElementById(SpanText).style.font = "24px arial,serif";
-            document.getElementById(InputValue).style.font = "24px arial,serif";
         }
         else if (selectFontValue == '28') {
             document.getElementById(SpanText).style.font = " 28px arial,serif";
-            document.getElementById(InputValue).style.font = " 28px arial,serif";
         }
         else if (selectFontValue == 32) {
             document.getElementById(SpanText).style.font = "32px arial,serif";
-            document.getElementById(InputValue).style.font = "32px arial,serif";
         }
         else if (selectFontValue == '36') {
             document.getElementById(SpanText).style.font = " 36px arial,serif";
-            document.getElementById(InputValue).style.font = " 36px arial,serif";
         }
         else {
             document.getElementById(SpanText).style.font = " 12px arial,serif";
-            document.getElementById(InputValue).style.font = " 12px arial,serif";
         }
     }
 };
@@ -275,7 +266,7 @@ $.each(result, function(key,newValue){
 
 for (var span in spanDiv){
     if(span.className === key){
-        if(Number(span.id)%5 === 2){
+        if(Number(span.id)%5 === 1){
         span.replace(span.value, newValue);
         }
         }
