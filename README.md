@@ -6,7 +6,7 @@ To run this program, currently all you have to do is open the 'index.html' file 
 Warning, there are still alot of bugs in the program. Some include refresh interval does not work and you cannot remove an image once you add it. It also does not save the information you added to the page yet.  
 
 
-Specifications: 
+<b>Specifications:</b> 
 
 - 1 movable image that is selected by the user
 - 1 location to pull json data from
