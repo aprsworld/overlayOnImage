@@ -8,11 +8,12 @@ Warning, there are still alot of bugs in the program. Some include refresh inter
 
 <b>Specifications:</b> 
 
-- 1 movable image that is selected by the user
 - 1 location to pull json data from
 - movable spans = these spans will come from either from json or custom made by the user
 - ability to change the font size of the spans
 - refreshInterval for the json spans to update on a 10, 30, or 60 second interval
+- 1 immovable, not scaled down image 
+
 
 
 
