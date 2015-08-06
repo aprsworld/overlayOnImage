@@ -13,6 +13,7 @@ var ImportedImageData;
 var divCounter = 0;
 var refreshInterval;
 var inputDivCount = 0;
+var imageCount = 0;
 
 var JsonFile = function(){
 //This function loads the json data from the external server and creates options for the user to use. 
@@ -27,9 +28,15 @@ $.each(result,function(i,field){
 };
 var DisplayImage = function(){
 //creates and displays an image onto the webpages from a given URL.
+    if(imageCount === 0){
     var imageUrl = document.getElementById('imageURL');
         ImportedImageData = imageUrl.value; 
     createImage(ImportedImageData);
+    imageCount = 1;
+    }
+    else {
+        alert('You cannot add another image unless you remove the image you have up already');
+        }
         };
 var displayValue = function(value){
 //creates the input, span elements, and the buttons and assigns the innerHTML and values of the span and input elements to one of the json datas.
@@ -116,11 +123,19 @@ var createImage = function(imageURL){
 //create image from given URL
     var newImage = document.createElement('img');
         newImage.src = imageURL;
+        newImage.id = 'GeneratedImage';
         newImage.style.width = '600px';
         newImage.style.height = '400px';
     var getImageDiv = document.getElementById('image');
         getImageDiv.appendChild(newImage);
-        };
+	       $(function(){
+                   $('#GeneratedImage').draggable();
+                     });
+};
+var removeImage = function(){
+   document.getElementById('GeneratedImage').remove();
+    imageCount = 0;
+};
 var createSpan = function(text, clas){
 //create span node and gives it draggable features
 	var newSpan = document.createElement("span");
@@ -133,7 +148,7 @@ var createSpan = function(text, clas){
 	       $(function(){
            if(document.getElementById(idNumber%5 === 0)){
                    $('.' + clas).draggable();
-                   }
+                  }
                      });
    createBreak(spanDiv);
 };
