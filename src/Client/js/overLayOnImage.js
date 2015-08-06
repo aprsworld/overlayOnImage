@@ -5,8 +5,8 @@
  *  */
 var idNumber = 0;
 var inputDiv = document.getElementById('input');
-var imageDiv;
-var spanDiv;
+var imageDiv = document.getElementById('image');
+var spanDiv = document.getElementById('span');
 var Count = 0;
 var ImportedJsonData;
 var ImportedImageData;
@@ -14,16 +14,6 @@ var divCounter = 0;
 var refreshInterval;
 var inputDivCount = 0;
 
-var Load = function(){
-/*This function is created to allow the user to populate a blank webpage with a given set of tools.
- * This function still has a lot of work to be done.*/
-     imageDiv = document.createElement('div');
-        imageDiv.id = 'image';
-        document.body.appendChild(imageDiv);
-     spanDiv = document.createElement('div');
-        spanDiv.id = 'span';
-        document.body.appendChild(spanDiv);
- };
 var JsonFile = function(){
 //This function loads the json data from the external server and creates options for the user to use. 
 var jsonUrl = document.getElementById('jsonURL');
@@ -62,6 +52,35 @@ else{
 });
 }
 };
+var updateInfo = function(){
+//updates the information displayed on the webpage every couple seconds (either 10, 30, or 60 seconds)
+var refreshJsonData = document.getElementById('timer');
+if(refreshJsonData.options[refreshJsonData.selectedIndex].value !== 'null'){
+if(inputDivCount > 0){
+for (var input = 0; input < inputDivCount; input = input + 1){
+    var input1 = input * 5 + 1;
+    if(document.getElementById(input1) !== null){
+    if(document.getElementById(input1).className !== 'UserCreated'){
+    var inputNow = document.getElementById(input1);
+    update(inputNow, input1);
+    }
+    else{
+    }
+    }
+else{
+console.log('element does not exist');
+    }
+    }
+setTimeout(updateInfo, refreshInterval);
+}
+else{
+console.log('There are no elements to update.');
+}
+}
+else{
+console.log('data will not update');
+}
+};
 var createOptions = function(key){
 //displays all the keys from the json file.
     daySelect = document.getElementById('data');
@@ -92,7 +111,7 @@ var createAForImage = function(imageURL){
         newAttribute.innerHTML = 'Live Video';
     var getImageDiv = document.getElementById('image');
         getImageDiv.appendChild(newAttribute);
-        };
+};
 var createImage = function(imageURL){
 //create image from given URL
     var newImage = document.createElement('img');
@@ -112,7 +131,9 @@ var createSpan = function(text, clas){
 	console.log('created span  node');
 		spanDiv.appendChild(newSpan);
 	       $(function(){
+           if(document.getElementById(idNumber%5 === 0)){
                    $('.' + clas).draggable();
+                   }
                      });
    createBreak(spanDiv);
 };
@@ -129,7 +150,6 @@ var createInput = function(text, clas){
             inputDivCount = inputDivCount + 1; 
 
 };
-
 var createEditButton = function(clas){
 // create edit button associated with input node
 	 var newEditButton = document.createElement("button");
@@ -140,7 +160,6 @@ var createEditButton = function(clas){
 },false);
 		inputDiv.appendChild(newEditButton);
 };
-
 var editSpan = function(EditButtonID){
 //allow the span element to be edited from it's corresponding input field.
         var inputID = String(Number(EditButtonID) - 1 );
@@ -151,7 +170,6 @@ var editSpan = function(EditButtonID){
             console.log(getInput);
 				getSpan.innerHTML = getInput.value;
 };
-
 var createDeleteButton = function(clas){
 // create remove button associated with input node
 	var deleteButton = document.createElement("button");
@@ -246,36 +264,6 @@ var remove = function(deleteButtonID){
     font.remove();
     delet.remove();
 };
-var updateInfo = function(){
-//updates the information displayed on the webpage every couple seconds (either 10, 30, or 60 seconds)
-var refreshJsonData = document.getElementById('timer');
-if(refreshJsonData.options[refreshJsonData.selectedIndex].value !== 'null'){
-if(inputDivCount > 0){
-for (var input = 0; input < inputDivCount; input = input + 1){
-    var input1 = input * 5 + 1;
-    if(document.getElementById(input1) !== null){
-    if(document.getElementById(input1).className !== 'UserCreated'){
-    var inputNow = document.getElementById(input1);
-    update(inputNow, input1);
-    }
-    else{
-    }
-    }
-else{
-console.log('element does not exist');
-    }
-    }
-setTimeout(updateInfo, refreshInterval);
-}
-else{
-console.log('There are no elements to update.');
-}
-}
-else{
-console.log('data will not update');
-}
-};
-
 var update = function(InputName, input1){
 //updates to the most recent information for each element. 
 $.getJSON(ImportedJsonData, function(result){
