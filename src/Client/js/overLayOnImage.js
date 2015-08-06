@@ -124,13 +124,8 @@ var createImage = function(imageURL){
     var newImage = document.createElement('img');
         newImage.src = imageURL;
         newImage.id = 'GeneratedImage';
-        newImage.style.width = '600px';
-        newImage.style.height = '400px';
     var getImageDiv = document.getElementById('image');
         getImageDiv.appendChild(newImage);
-	       $(function(){
-                   $('#GeneratedImage').draggable();
-                     });
 };
 var removeImage = function(){
    document.getElementById('GeneratedImage').remove();
