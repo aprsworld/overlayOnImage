@@ -13,7 +13,6 @@ Specifications:
 - movable spans = these spans will come from either from json or custom made by the user
 - ability to change the font size of the spans
 - refreshInterval for the json spans to update on a 10, 30, or 60 second interval
-- 
 
 
 
