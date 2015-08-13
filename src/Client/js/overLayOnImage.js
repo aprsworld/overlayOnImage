@@ -31,13 +31,15 @@ var DisplayImage = function(){
     if(imageCount === 0){
     var imageUrl = document.getElementById('imageURL');
         ImportedImageData = imageUrl.value; 
-    createImage(ImportedImageData);
-    imageCount = 1;
+        
+        console.log(ImportedImageData);
+       createImage(ImportedImageData);
+        imageCount = 1;
     }
     else {
         alert('You cannot add another image unless you remove the image you have up already');
         }
-        };
+};
 var displayValue = function(value){
 //creates the input, span elements, and the buttons and assigns the innerHTML and values of the span and input elements to one of the json datas.
 if (value === 'null'){
@@ -121,11 +123,9 @@ var createAForImage = function(imageURL){
 };
 var createImage = function(imageURL){
 //create image from given URL
-    var newImage = document.createElement('img');
-        newImage.src = imageURL;
-        newImage.id = 'GeneratedImage';
-    var getImageDiv = document.getElementById('image');
-        getImageDiv.appendChild(newImage);
+    var newImage = $('<img />').attr('src', imageURL).attr('id', 'GeneratedImage').load(function(){
+        $('#image').append(newImage);
+        });
 };
 var removeImage = function(){
    document.getElementById('GeneratedImage').remove();
@@ -141,12 +141,22 @@ var createSpan = function(text, clas){
 	console.log('created span  node');
 		spanDiv.appendChild(newSpan);
 	       $(function(){
-           if(document.getElementById(idNumber%5 === 0)){
+           if(Span){
                    $('.' + clas).draggable();
                   }
                      });
    createBreak(spanDiv);
 };
+
+var Span = function(){
+    var isSpan = idNumber%5;
+    if(isSpan === 0){
+        return true;
+   }
+   else{
+   return false;
+   }
+   };
 
 var createInput = function(text, clas){
 //create input node
