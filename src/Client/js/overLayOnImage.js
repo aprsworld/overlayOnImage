@@ -1,6 +1,5 @@
 /* Things that still need to be done
- *  update the image on a interval time (if needed)
- *  catch incorrect input data for the json textfield (incorrect meaning that it gives me 'get requests not found' or a 'cors error'
+ *  catch incorrect input data for the json textfield and image textfield.
  *  
  *  */
 var idNumber = 0;
@@ -28,13 +27,12 @@ $.each(result,function(i,field){
 };
 var DisplayImage = function(){
 //creates and displays an image onto the webpages from a given URL.
+
     if(imageCount === 0){
     var imageUrl = document.getElementById('imageURL');
-        ImportedImageData = imageUrl.value; 
-        
-        console.log(ImportedImageData);
+       ImportedImageData = imageUrl.value; 
        createImage(ImportedImageData);
-        imageCount = 1;
+       imageCount = 1;
     }
     else {
         alert('You cannot add another image unless you remove the image you have up already');
@@ -125,6 +123,7 @@ var createImage = function(imageURL){
 //create image from given URL
     var newImage = $('<img />').attr('src', imageURL).attr('id', 'GeneratedImage').load(function(){
         $('#image').append(newImage);
+        console.log(document.getElementById('GeneratedImage').complete);
         });
 };
 var removeImage = function(){
