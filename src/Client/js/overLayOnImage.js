@@ -15,7 +15,9 @@ var inputDivCount = 0;
 var imageCount = 0;
 
 var JsonFile = function(){
-//This function loads the json data from the external server and creates options for the user to use. 
+/*This function loads the json data from the external server and creates options for the user to use.
+ * The way it works is it takes the JSON URL given to it by the user and imports that data into our webpage. Each key in the JSON file gets stored in a Options element.
+ */
 var jsonUrl = document.getElementById('jsonURL');
 ImportedJsonData = jsonUrl.value;
 $.getJSON(ImportedJsonData, function(result){
@@ -26,7 +28,9 @@ $.each(result,function(i,field){
 });
 };
 var DisplayImage = function(){
-//creates and displays an image onto the webpages from a given URL.
+/*creates and displays an image onto the webpages from a given URL. 
+ * First, I check to see if there is a image already loaded on the page. If there is, then I prohibit the user from adding another image. If there is not image, then I build an image given to me by the URL specified by the user. note: I still need to check for errors.
+ * */
 
     if(imageCount === 0){
     var imageUrl = document.getElementById('imageURL');
@@ -89,7 +93,7 @@ console.log('data will not update');
 }
 };
 var createOptions = function(key){
-//displays all the keys from the json file.
+//displays all the keys from the json file and stores each one of them in a Options element.
     daySelect = document.getElementById('data');
     myOption = document.createElement("option");
     myOption.innerHTML = key;
@@ -97,7 +101,7 @@ var createOptions = function(key){
     daySelect.appendChild(myOption);
     };
 var addMoreText = function(){
-//allows the user to add their own information to the website.
+//allows the user to add their own information to the website. This function creates a span, input field and all of the buttons needed for the user.
 console.log('add more text');
 createEverything('add new data', 'UserCreated');
 createBreak(inputDiv);
@@ -112,7 +116,7 @@ var createEverything = function(value, clas){
        idNumber = idNumber + 5;
    };
 var createAForImage = function(imageURL){
-//create a element for an specific image
+//create a element for an specific image. Note: This function may not be needed.
     var newAttribute = document.createElement('a');
         newAttribute.href = imageURL;
         newAttribute.innerHTML = 'Live Video';
@@ -127,6 +131,7 @@ var createImage = function(imageURL){
         });
 };
 var removeImage = function(){
+//deletes the image that is displayed on the screen. Currently does not work for null values.
    document.getElementById('GeneratedImage').remove();
     imageCount = 0;
 };
@@ -148,6 +153,7 @@ var createSpan = function(text, clas){
 };
 
 var Span = function(){
+//checks to see if a specific element is a span. Needed this because only spans should be draggable.
     var isSpan = idNumber%5;
     if(isSpan === 0){
         return true;
