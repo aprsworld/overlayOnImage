@@ -36,13 +36,8 @@ var DisplayImage = function(){
     var imageUrl = document.getElementById('imageURL');
        ImportedImageData = imageUrl.value; 
        console.log(ImportedImageData);
-       //not sure why this works please look at this
-       if(ImportedImageData !== ' '){
        createImage(ImportedImageData);
        }
-       else {
-       }
-    }
     else {
         alert('You cannot add another image unless you remove the image you have up already');
         }
