@@ -35,8 +35,13 @@ var DisplayImage = function(){
     if(imageCount === 0){
     var imageUrl = document.getElementById('imageURL');
        ImportedImageData = imageUrl.value; 
+       console.log(ImportedImageData);
+       //not sure why this works please look at this
+       if(ImportedImageData !== ' '){
        createImage(ImportedImageData);
-       imageCount = 1;
+       }
+       else {
+       }
     }
     else {
         alert('You cannot add another image unless you remove the image you have up already');
@@ -128,12 +133,18 @@ var createImage = function(imageURL){
     var newImage = $('<img />').attr('src', imageURL).attr('id', 'GeneratedImage').load(function(){
         $('#image').append(newImage);
         console.log(document.getElementById('GeneratedImage').complete);
+        imageCount = 1;
         });
 };
 var removeImage = function(){
 //deletes the image that is displayed on the screen. Currently does not work for null values.
+    if(document.getElementById('GeneratedImage')){
    document.getElementById('GeneratedImage').remove();
     imageCount = 0;
+    }
+    else{
+    alert('no image to remove');
+    }
 };
 var createSpan = function(text, clas){
 //create span node and gives it draggable features
